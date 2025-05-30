@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AuthLayout from "../../components/layouts/AuthLayout";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Input from "../../components/Inputs/Input";
 
@@ -11,9 +11,7 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  const handleLogin = async (e)=> {
-
-  }
+  const handleLogin = async (e) => {};
 
   return (
     <>
@@ -26,12 +24,34 @@ export default function Login() {
 
           <form onSubmit={handleLogin}>
             <Input
+              id="email"
               value={email}
               onChange={({ target }) => setEmail(target.value)}
               label="Email Address"
               placeholder="john@example.com"
               type="text"
             />
+            <Input
+              id="password"
+              value={password}
+              onChange={({ target }) => setPassword(target.value)}
+              label="Password"
+              placeholder="min 8 characters"
+              type="password"
+            />
+
+            {error && <p className="">{error}</p>}
+
+            <button type="submit" className="">
+              LOGIN
+            </button>
+
+            <p className="">
+              Dont't have an account?{" "}
+              <Link className="" to="/signup">
+                SignUp
+              </Link>
+            </p>
           </form>
         </div>
       </AuthLayout>
