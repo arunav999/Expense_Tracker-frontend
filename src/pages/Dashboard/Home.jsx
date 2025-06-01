@@ -6,6 +6,7 @@ import { IoMdCard } from "react-icons/io";
 
 import InfoCard from "../../components/Cards/InfoCard";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
+import ExpenseTransactions from "../../components/Dashboard/ExpenseTransactions";
 
 import { useUserAuth } from "../../hooks/useUserAuth";
 
@@ -77,7 +78,7 @@ export default function Home() {
           </div> */}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            <RecentTransactions
+            {/* <RecentTransactions
               transactions={dashboardData?.recentTransactions}
               onSeeMore={() => navigate("/expense")}
             />
@@ -86,6 +87,13 @@ export default function Home() {
               totalBalance={dashboardData?.totalBalance || 0}
               totalIncome={dashboardData?.totalIncome || 0}
               totalExpense={dashboardData?.totalExpenses || 0}
+            /> */}
+
+            <ExpenseTransactions
+              transactions={
+                dashboardData?.last30DaysExpenses?.transactions || {}
+              }
+              onSeeMore={() => navigate("/expense")}
             />
           </div>
         </div>
