@@ -7,6 +7,7 @@ import { IoMdCard } from "react-icons/io";
 import InfoCard from "../../components/Cards/InfoCard";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
 import ExpenseTransactions from "../../components/Dashboard/ExpenseTransactions";
+import Last30DaysExpenses from "../../components/Dashboard/Last30DaysExpenses";
 
 import { useUserAuth } from "../../hooks/useUserAuth";
 
@@ -94,6 +95,10 @@ export default function Home() {
                 dashboardData?.last30DaysExpenses?.transactions || {}
               }
               onSeeMore={() => navigate("/expense")}
+            />
+
+            <Last30DaysExpenses
+              data={dashboardData?.last30DaysExpenses?.transactions || {}}
             />
           </div>
         </div>
