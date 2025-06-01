@@ -17,6 +17,7 @@ const FinanceOverview = ({ totalBalance, totalIncome, totalExpense }) => {
       amount: totalIncome,
     },
   ];
+
   return (
     <>
       <div className="card">
