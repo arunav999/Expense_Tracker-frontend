@@ -12,6 +12,7 @@ import { useUserAuth } from "../../hooks/useUserAuth";
 import { addThousandsSeparator } from "../../utils/helper";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
+import RecentTransactions from "../../components/Dashboard/RecentTransactions";
 
 export default function Home() {
   useUserAuth();
@@ -71,6 +72,13 @@ export default function Home() {
               label="Total Expense"
               value={addThousandsSeparator(dashboardData?.totalExpenses || 0)}
               color="bg-red-500"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <RecentTransactions
+              transactions={dashboardData?.recentTransactions}
+              onSeeMore={() => navigate("/expense")}
             />
           </div>
         </div>
