@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
 import { IoMdCard } from "react-icons/io";
 
 import InfoCard from "../../components/Cards/InfoCard";
@@ -8,6 +9,7 @@ import DashboardLayout from "../../components/layouts/DashboardLayout";
 
 import { useUserAuth } from "../../hooks/useUserAuth";
 
+import { addThousandsSeparator } from "../../utils/helper";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 
@@ -55,6 +57,20 @@ export default function Home() {
               label="Total Balance"
               value={addThousandsSeparator(dashboardData?.totalBalance || 0)}
               color="bg-primary"
+            />
+
+            <InfoCard
+              icon={<LuWalletMinimal />}
+              label="Total Income"
+              value={addThousandsSeparator(dashboardData?.totalIncome || 0)}
+              color="bg-orange-500"
+            />
+
+            <InfoCard
+              icon={<LuHandCoins />}
+              label="Total Expense"
+              value={addThousandsSeparator(dashboardData?.totalExpenses || 0)}
+              color="bg-red-500"
             />
           </div>
         </div>
