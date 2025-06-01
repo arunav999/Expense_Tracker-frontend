@@ -1,6 +1,8 @@
 import DashboardLayout from "../../components/layouts/DashboardLayout";
+import { useUserAuth } from "../../hooks/useUserAuth";
 
 export default function Home() {
+  useUserAuth();
   return (
     <>
       <DashboardLayout activeMenu="Dashboard">
