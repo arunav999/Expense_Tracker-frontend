@@ -9,6 +9,7 @@ import Modal from "../../components/Modal";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
 import IncomeOverview from "../../components/Income/IncomeOverview";
 import AddIncomeForm from "../../components/Income/AddIncomeForm";
+import IncomeList from "../../components/Income/IncomeList";
 
 export default function Income() {
   const [incomeData, setIncomeData] = useState([]);
@@ -98,12 +99,28 @@ export default function Income() {
             </div>
           </div>
 
+          <IncomeList
+            transactions={incomeData}
+            onDelete={(id) => {
+              setOpenDeleteAlert({ show: true, data: id });
+            }}
+            onDownload={handleDownloadIncomeDetails}
+          />
+
           <Modal
             isOpen={openAddIncomeModal}
             onClose={() => setOpenAddIncomeModal(false)}
             title="Add Income"
           >
             <AddIncomeForm onAddIncome={handleAddIncome} />
+          </Modal>
+
+          <Modal
+            isOpen={openDeleteAlert.show}
+            onClose={() => setOpenDeleteAlert({ show: false, data: null })}
+            title="Delete Income"
+          >
+            <DeleteAlert content="Are you sure you want to delete this income details?" onDelete={()=> deleteIncome(openDeleteAlert.data)}/>
           </Modal>
         </div>
       </DashboardLayout>
