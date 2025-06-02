@@ -10,8 +10,12 @@ import DashboardLayout from "../../components/layouts/DashboardLayout";
 import IncomeOverview from "../../components/Income/IncomeOverview";
 import AddIncomeForm from "../../components/Income/AddIncomeForm";
 import IncomeList from "../../components/Income/IncomeList";
+import DeleteAlert from "../../components/DeleteAlert";
+import { useUserAuth } from "../../hooks/useUserAuth";
 
 export default function Income() {
+  useUserAuth();
+
   const [incomeData, setIncomeData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [openDeleteAlert, setOpenDeleteAlert] = useState({
@@ -76,7 +80,20 @@ export default function Income() {
     }
   };
 
-  const deleteIncome = async () => {};
+  const deleteIncome = async (id) => {
+    try {
+      await axiosInstance.delete(API_PATHS.INCOME.DELETE_INCOME(id));
+
+      setOpenDeleteAlert({ show: false, data: null });
+      toast.success("Income details deleted successfully");
+      fetchIncomeDetails();
+    } catch (error) {
+      console.error(
+        "Error deleting income:",
+        error.response?.data?.message || error.message
+      );
+    }
+  };
 
   const handleDownloadIncomeDetails = async () => {};
 
@@ -120,7 +137,10 @@ export default function Income() {
             onClose={() => setOpenDeleteAlert({ show: false, data: null })}
             title="Delete Income"
           >
-            <DeleteAlert content="Are you sure you want to delete this income details?" onDelete={()=> deleteIncome(openDeleteAlert.data)}/>
+            <DeleteAlert
+              content="Are you sure you want to delete this income details?"
+              onDelete={() => deleteIncome(openDeleteAlert.data)}
+            />
           </Modal>
         </div>
       </DashboardLayout>
