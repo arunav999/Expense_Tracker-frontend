@@ -1,3 +1,5 @@
+import { Toaster } from "react-hot-toast";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -27,6 +29,15 @@ export default function App() {
           </Routes>
         </Router>
       </div>
+
+      <Toaster
+        toastOptions={{
+          className: "",
+          style: {
+            fontSize: "13px",
+          },
+        }}
+      />
     </UserProvider>
   );
 }
