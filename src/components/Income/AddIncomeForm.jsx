@@ -1,0 +1,56 @@
+import { useState } from "react";
+
+import Input from "../Inputs/Input";
+
+const AddIncomeForm = ({ onAddIncome }) => {
+  const [income, setIncome] = useState({
+    source: "",
+    amount: "",
+    date: "",
+    icon: "",
+  });
+
+  const handleChnage = (key, value) => setIncome({ ...income, [key]: value });
+
+  return (
+    <>
+      <div>
+        <Input
+          value={income.source}
+          onChange={({ target }) => handleChnage("source", target.value)}
+          label="Income Source"
+          placeholder="Freelance, Salary, etc"
+          type="text"
+        />
+
+        <Input
+          value={income.amount}
+          onChange={({ target }) => handleChnage("amount", target.value)}
+          label="Date"
+          placeholder=""
+          type="number"
+        />
+
+        <Input
+          value={income.date}
+          onChange={({ target }) => handleChnage("date", target.value)}
+          label="Date"
+          placeholder=""
+          type="date"
+        />
+
+        <div className="flex justify-end mt-6">
+          <button
+            type="button"
+            className="add-btn add-btn-fill"
+            onClick={() => onAddIncome(income)}
+          >
+            Add Income
+          </button>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default AddIncomeForm;

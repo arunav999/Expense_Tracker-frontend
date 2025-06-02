@@ -6,6 +6,7 @@ import { API_PATHS } from "../../utils/apiPaths";
 import Modal from "../../components/Modal";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
 import IncomeOverview from "../../components/Income/IncomeOverview";
+import AddIncomeForm from "../../components/Income/AddIncomeForm";
 
 export default function Income() {
   const [incomeData, setIncomeData] = useState([]);
@@ -66,7 +67,7 @@ export default function Income() {
             onClose={() => setOpenAddIncomeModal(false)}
             title="Add Income"
           >
-            <div>Add Income Form</div>
+            <AddIncomeForm onAddIncome={handleAddIncome} />
           </Modal>
         </div>
       </DashboardLayout>
