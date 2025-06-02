@@ -17,6 +17,7 @@ import { API_PATHS } from "../../utils/apiPaths";
 import RecentTransactions from "../../components/Dashboard/RecentTransactions";
 import FinanceOverview from "../../components/Dashboard/FinanceOverview";
 import RecentIncomeWithChart from "../../components/Dashboard/RecentIncomeWithChart";
+import RecentIncome from "../../components/Dashboard/RecentIncome";
 
 export default function Home() {
   useUserAuth();
@@ -66,7 +67,7 @@ export default function Home() {
     <>
       <DashboardLayout activeMenu="Dashboard">
         <div className="my-5 mx-auto">
-          {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <InfoCard
               icon={<IoMdCard />}
               label="Total Balance"
@@ -87,10 +88,10 @@ export default function Home() {
               value={addThousandsSeparator(dashboardData?.totalExpenses || 0)}
               color="bg-red-500"
             />
-          </div> */}
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            {/* <RecentTransactions
+            <RecentTransactions
               transactions={dashboardData?.recentTransactions}
               onSeeMore={() => navigate("/expense")}
             />
@@ -99,9 +100,9 @@ export default function Home() {
               totalBalance={dashboardData?.totalBalance || 0}
               totalIncome={dashboardData?.totalIncome || 0}
               totalExpense={dashboardData?.totalExpenses || 0}
-            /> */}
+            />
 
-            {/* {expenseCheck && (
+            {expenseCheck && (
               <ExpenseTransactions
                 transactions={dashboardData.last30DaysExpenses.transactions}
                 onSeeMore={() => navigate("/expense")}
@@ -112,7 +113,7 @@ export default function Home() {
               <Last30DaysExpenses
                 data={dashboardData?.last30DaysExpenses?.transactions || {}}
               />
-            )} */}
+            )}
 
             {recentIncome && (
               <RecentIncomeWithChart
@@ -121,6 +122,15 @@ export default function Home() {
                   []
                 }
                 totalIncome={dashboardData?.totalIncome || 0}
+              />
+            )}
+
+            {recentIncome && (
+              <RecentIncome
+                transactions={
+                  dashboardData?.last60DaysIncome?.transactions || []
+                }
+                onSeeMore={() => navigate("/income")}
               />
             )}
           </div>
