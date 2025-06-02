@@ -16,6 +16,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import RecentTransactions from "../../components/Dashboard/RecentTransactions";
 import FinanceOverview from "../../components/Dashboard/FinanceOverview";
+import RecentIncomeWithChart from "../../components/Dashboard/RecentIncomeWithChart";
 
 export default function Home() {
   useUserAuth();
@@ -54,6 +55,12 @@ export default function Home() {
   const expenseCheck =
     dashboardData?.last30DaysExpenses?.transactions &&
     Array.isArray(dashboardData.last30DaysExpenses.transactions);
+
+  const recentIncome =
+    dashboardData?.last60DaysIncome?.transactions &&
+    Array.isArray(dashboardData?.last60DaysIncome?.transactions);
+
+  // console.log(dashboardData);
 
   return (
     <>
@@ -94,7 +101,7 @@ export default function Home() {
               totalExpense={dashboardData?.totalExpenses || 0}
             /> */}
 
-            {expenseCheck && (
+            {/* {expenseCheck && (
               <ExpenseTransactions
                 transactions={dashboardData.last30DaysExpenses.transactions}
                 onSeeMore={() => navigate("/expense")}
@@ -104,6 +111,16 @@ export default function Home() {
             {expenseCheck && (
               <Last30DaysExpenses
                 data={dashboardData?.last30DaysExpenses?.transactions || {}}
+              />
+            )} */}
+
+            {recentIncome && (
+              <RecentIncomeWithChart
+                data={
+                  dashboardData?.last60DaysIncome?.transactions?.slice(0, 4) ||
+                  []
+                }
+                totalIncome={dashboardData?.totalIncome || 0}
               />
             )}
           </div>
