@@ -51,6 +51,10 @@ export default function Home() {
     return () => {};
   }, []);
 
+  const expenseCheck =
+    dashboardData?.last30DaysExpenses?.transactions &&
+    Array.isArray(dashboardData.last30DaysExpenses.transactions);
+
   return (
     <>
       <DashboardLayout activeMenu="Dashboard">
@@ -90,16 +94,18 @@ export default function Home() {
               totalExpense={dashboardData?.totalExpenses || 0}
             /> */}
 
-            <ExpenseTransactions
-              transactions={
-                dashboardData?.last30DaysExpenses?.transactions || {}
-              }
-              onSeeMore={() => navigate("/expense")}
-            />
+            {expenseCheck && (
+              <ExpenseTransactions
+                transactions={dashboardData.last30DaysExpenses.transactions}
+                onSeeMore={() => navigate("/expense")}
+              />
+            )}
 
-            <Last30DaysExpenses
-              data={dashboardData?.last30DaysExpenses?.transactions || {}}
-            />
+            {expenseCheck && (
+              <Last30DaysExpenses
+                data={dashboardData?.last30DaysExpenses?.transactions || {}}
+              />
+            )}
           </div>
         </div>
       </DashboardLayout>
