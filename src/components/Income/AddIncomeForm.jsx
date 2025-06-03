@@ -32,7 +32,7 @@ const AddIncomeForm = ({ onAddIncome }) => {
         <Input
           value={income.amount}
           onChange={({ target }) => handleChnage("amount", target.value)}
-          label="Income Source"
+          label="Amount"
           placeholder=""
           type="number"
         />
