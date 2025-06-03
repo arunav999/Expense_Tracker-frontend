@@ -1,5 +1,4 @@
 import { LuTrendingUpDown } from "react-icons/lu";
-import EXMP from "../../assets/images/exmp.jpg";
 
 const AuthLayout = ({ children }) => {
   return (
@@ -24,11 +23,11 @@ const AuthLayout = ({ children }) => {
             />
           </div>
 
-          <img
+          {/* <img
             src={EXMP}
             alt=""
             className="w-64 lg:w-[90%] absolute bottom-10 shadow-lg shadow-blue-400/15"
-          />
+          /> */}
         </div>
       </div>
     </>
