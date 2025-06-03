@@ -11,6 +11,8 @@ import DashboardLayout from "../../components/layouts/DashboardLayout";
 import ExpenseOverview from "../../components/Expense/ExpenseOverview";
 import Modal from "../../components/Modal";
 import AddExpenseForm from "../../components/Expense/AddExpenseForm";
+import DeleteAlert from "../../components/DeleteAlert";
+import ExpenseList from "../../components/Expense/ExpenseList";
 
 export default function Expense() {
   useUserAuth();
@@ -79,6 +81,23 @@ export default function Expense() {
     }
   };
 
+  const deleteExpense = async (id) => {
+    try {
+      await axiosInstance.delete(API_PATHS.EXPENSE.DELETE_EXPENSE(id));
+
+      setOpenDeleteAlert({ show: false, data: null });
+      toast.success("Expense details deleted successfully");
+      fetchExpenseDetails();
+    } catch (error) {
+      console.error(
+        "Error deleting expense:",
+        error.response?.data?.message || error.message
+      );
+    }
+  };
+
+  const handleDownloadExpenseDetails = async () => {};
+
   useEffect(() => {
     fetchExpenseDetails();
 
@@ -95,6 +114,12 @@ export default function Expense() {
                 onExpenseIncome={() => setOpenAddExpenseModal(true)}
               />
             </div>
+
+            <ExpenseList
+              transactions={expenseData}
+              onDelete={(id) => setOpenDeleteAlert({ show: true, data: id })}
+              onDownload={handleDownloadExpenseDetails}
+            />
           </div>
 
           <Modal
@@ -103,6 +128,17 @@ export default function Expense() {
             title="Add Expense"
           >
             <AddExpenseForm onAddExpense={handleAddExpense} />
+          </Modal>
+
+          <Modal
+            isOpen={openDeleteAlert.show}
+            onClose={() => setOpenDeleteAlert({ show: false, data: null })}
+            title="Delete Expense"
+          >
+            <DeleteAlert
+              content="Are you sure you want to delete this expense details?"
+              onDelete={() => deleteExpense(openDeleteAlert.data)}
+            />
           </Modal>
         </div>
       </DashboardLayout>

@@ -17,8 +17,6 @@ const CustomPieChart = ({
   colors,
   showTextAnchor,
 }) => {
-  console.log("Legend Data:", data);
-
   return (
     <>
       <ResponsiveContainer width="100%" height={380}>
